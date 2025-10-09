@@ -2,53 +2,53 @@ import mongoose from "mongoose";
 const ProductSchema = mongoose.Schema({
   title: {
     type: String,
-    require: true
+    require: true,
   },
   desc: {
     type: String,
-    require: true
+    require: true,
   },
 
   whatinbox: {
-    type: String
+    type: String,
   },
   img: {
     type: String,
-    require: true
+    require: true,
   },
 
   video: {
-    type: String
+    type: String,
   },
 
   wholesalePrice: {
-    type: Number
+    type: Number,
   },
 
   wholesaleMinimumQuantity: {
-    type: Number
+    type: Number,
   },
   categories: {
-    type: Array
+    type: Array,
   },
   concern: {
-    type: Array
+    type: Array,
   },
   brand: {
-    type: String
+    type: String,
   },
   skintype: {
-    type: Array
+    type: Array,
   },
   originalPrice: {
-    type: Number
+    type: Number,
   },
   discountedPrice: {
-    type: Number
+    type: Number,
   },
   inStock: {
     type: Boolean,
-    default: true
+    default: true,
   },
   ratings: [
     {
@@ -59,6 +59,7 @@ const ProductSchema = mongoose.Schema({
     },
   ],
 });
+ProductSchema.index({"$**":"text"});
 
 const Product = mongoose.model("Product", ProductSchema);
 export default Product;
