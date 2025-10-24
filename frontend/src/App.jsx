@@ -6,6 +6,9 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Announcement from "./components/Announcement";
 import Product from "./pages/Product";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
 
 function App() {
 
@@ -34,13 +37,21 @@ function App() {
           element: <Cart />,
         },
          {
+          path: "/login",
+          element: <Login />,
+        },  
+         {
           path: "/myaccount",
           element: <Myaccount />
         },
          {
           path:"/product/:productId",
           element: <Product />
-        } 
+        },
+         {
+          path: "/create-account",
+          element: <Register />,
+        }
 
     ],
    },
