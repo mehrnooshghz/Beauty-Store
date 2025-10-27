@@ -17,6 +17,8 @@ import {
   FaSearch,
   FaStethoscope
 } from 'react-icons/fa';
+import { Link} from 'react-router-dom';
+
 const Menu = () => {
   return (
     <div className='h-screen bg-gray-100 p-5 w-[350px] shadow-lgs'>
@@ -33,28 +35,36 @@ const Menu = () => {
 
         <hr className='w-full my-5 border-gray-500'/>
 
+       <Link to='users'>
         <li className='flex items-center text-[20px] cursor-pointer mt-5 transition-colors duration-100'>
           <FaUsers className='mr-[15px] text-[#ef93db] '/>
           Users
         </li>
+       </Link>
 
-        <li className='flex items-center text-[20px] cursor-pointer mt-5 transition-colors duration-100'>
+       <Link to='/products'>
+         <li className='flex items-center text-[20px] cursor-pointer mt-5 transition-colors duration-100'>
           <FaBox className='mr-[15px] text-[#ef93db] '/>
           Products
         </li>
+       </Link>
 
+       <Link to='/orders'>
         <li className='flex items-center text-[20px] cursor-pointer mt-5 transition-colors duration-100'>
           <FaClipboardList className='mr-[15px] text-[#ef93db] '/>
           Orders
         </li>
+       </Link>
 
         <hr className='w-full my-5 border-gray-500'/>
 
+        <Link to="/banners">
         <li className='flex items-center text-[20px] cursor-pointer mt-5 transition-colors duration-100'>
           <FaElementor className='mr-[15px] text-[#ef93db] '/>
           Banners
         </li>
 
+        </Link>
         <li className='flex items-center text-[20px] cursor-pointer mt-5 transition-colors duration-100'>
           <FaCog className='mr-[15px] text-[#ef93db] '/>
           Settings
