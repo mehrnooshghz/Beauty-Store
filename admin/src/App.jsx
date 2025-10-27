@@ -2,7 +2,9 @@ import {createBrowserRouter, Outlet, RouterProvider} from 'react-router-dom';
 import Menu from './components/Menu';
 import Home from './pages/Home';
 import Users from './pages/Users';
-import Products from './pages/Product';
+import Products from './pages/Products';
+import Orders from './pages/Orders';
+import Banners from './pages/Banners';
 
 function App() {
  const Layout = () => {
@@ -36,7 +38,16 @@ function App() {
         {
           path: '/products',
           element: <Products />,
+        },
+          {
+          path: '/orders',
+          element: <Orders />,
+        },
+         {
+          path: '/banners',
+          element: <Banners />,
         }
+        
   
       ],
     },
