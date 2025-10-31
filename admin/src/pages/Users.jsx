@@ -1,5 +1,8 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { FaTrash} from 'react-icons/fa';
+import { userRequest } from "../requestMethods";
+import { useEffect, useState } from 'react';
+
 const Users = () => {
 
   const columns =[
@@ -21,6 +24,24 @@ const Users = () => {
       },
     },
   ];
+
+  const [users, setUsers] = useState({});
+
+  useEffect(() =>{
+    const getUsers = async() =>{
+      try {
+
+        const res = await userRequest.get("/users");
+        setUsers(res.data)
+        
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    getUsers()
+
+  },[])
   
   const data = [
   {_id: "u001", name: "Charlie Brown", email: "chalie@example.com", phone: "123-456-789", role:"User"},
@@ -42,7 +63,7 @@ const Users = () => {
             </div>
       
             <div className='m-[30px]'>
-               <DataGrid getRowId={(row) => row._id}  rows={data} checkboxSelection columns={columns} />
+               <DataGrid getRowId={(row) => row._id}  rows={users} checkboxSelection columns={columns} />
       
             </div>
       
