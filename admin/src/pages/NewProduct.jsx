@@ -6,7 +6,6 @@ import { useState, useRef, useEffect } from "react";
 const NewProduct = () => {
   const [selectedImages, setSelectedImages] = useState(null);
   const [inputs, setInputs] = useState({});
-  const [Image, setImage] = useState("");
   const [uploading, setUploading] = useState("Ready to upload");
   const [selectedOptions, setSelectedOptions] = useState({
     concern: [],
@@ -49,9 +48,8 @@ const NewProduct = () => {
     try {
       const uploadRes = await axios.post( "https://api.cloudinary.com/v1_1/dgb1i9ti4/image/upload",data)
       const {url} = uploadRes.data;
-      setImage(url)
       setUploading("Uploaded 100%")
-      await userRequest.post("/products", {img: Image, ...inputs, ...selectedOptions})
+      await userRequest.post("/products", {img: url, ...inputs, ...selectedOptions})
     } catch (error) {
       console.log(error);
       setUploading("Uploading failed")
@@ -82,7 +80,7 @@ const NewProduct = () => {
               </div>
               ): 
               (
-                <img src={URL.createObjectURL(selectedImages)} alt=""  />
+                <img src={URL.createObjectURL(selectedImages)} alt="" className="h-[100px] w-[100px] object-cover rounded-md border"  />
               )
               
               }
