@@ -1,7 +1,8 @@
 import {LineChart} from '@mui/x-charts/LineChart';
+import { useEffect, useState } from 'react';
 import {FaUpload} from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { userRequest } from '../requestMethods';
 const Product = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
@@ -25,33 +26,37 @@ const Product = () => {
 
   },[])
 
+  
   const handleChange = (e) => {
     setInputs((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
-    });
-  };
+      return { ...prev, [e.target.name]: e.target.value }
+    })
+  }
 
-  const handleUpdate = async() =>{
+ const handleUpdate = async() =>{
   try {
     await userRequest.put(`/product/${id}`, {...inputs})
   } catch (error) {
     console.log(error)
   }
  }
-
   return (
     <div className="p-5 w-[70vw]">
-      {/* First Part */}
+      {/* FIRST PART */}
       <div className="flex items-center justify-between mb-5">
         <h3 className="text-3xl font-semibold">Product</h3>
         <Link to="/newproduct">
-         <button className='bg-slate-500 p-2.5 font-semibold text-white cursor-pointer'>Create</button>
+        <button className="bg-slate-400 p-2.5 font-semibold text-white cursor-pointer">
+          Create
+        </button>
         </Link>
       </div>
-      {/* Second Part */}
+      {/* SECOND PART */}
       <div className="flex flex-col md:flex-row gap-5">
-        {/* Chart */}
+
+        {/* CHART */}
         <div className="flex-1">
+
           <LineChart
             xAxis={[{data: [1, 2, 3, 5, 8, 10]}]}
             series={[
@@ -64,13 +69,14 @@ const Product = () => {
             margin={{left: 30, right: 30, top: 30, bottom: 30}}
             grid={{vertical: true, horizontal: true}}
           />
+
         </div>
 
         {/* PRODUCT CARD */}
 
         <div className="flex-1 bg-white p-5 shadow-lg rounded-lg">
           <div className="flex items-center mb-5">
-                <img
+            <img
               src={product.img}
               alt=""
               className="h-20 w-20 rounded-full mr-5"
@@ -99,10 +105,12 @@ const Product = () => {
             </div>
 
           </div>
-          </div>
-           </div>
 
-           {/* THIRD PART */}
+        </div>
+
+      </div>
+
+      {/* THIRD PART */}
 
       <div className="mt-5 bg-white p-5 shadow-lg rounded-lg">
         <form action="" className="flex flex-col md:flex-row gap-5">
@@ -117,6 +125,7 @@ const Product = () => {
                 name="title"
                 placeholder={product.title}
                 className="w-full p-2 border border-gray-300 rounded"
+
                 onChange={handleChange}
               />
             </div>
@@ -185,7 +194,7 @@ const Product = () => {
                 <FaUpload className="text-2xl text-gray-700" />
               </label>
 
-              <button className='bg-slate-500 text-white py-2 px-4 rounded mt-5' onChange={handleUpdate} >Update</button>
+              <button className='bg-slate-500 text-white py-2 px-4 rounded mt-5' onClick={handleUpdate}>Update</button>
 
             </div>
           </div>
@@ -198,4 +207,4 @@ const Product = () => {
   );
 };
 
-export default Product
+export default Product;
