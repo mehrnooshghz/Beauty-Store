@@ -10,9 +10,11 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProductList from "./pages/ProductList";
 import Order from "./pages/Order";
+import { useSelector } from "react-redux";
 
 
 function App() {
+  const user = useSelector((state) => state.user);
 
    const Layout = () => {
     return (
@@ -44,7 +46,7 @@ function App() {
         },  
          {
           path: "/myaccount",
-          element: <Myaccount />
+          element: user?.currentUser ? <Myaccount /> : <Home />,
         },
          {
           path:"/product/:productId",
@@ -60,7 +62,7 @@ function App() {
         },
          {
           path: "/myorders",
-          element: <Order />
+          element: user?.currentUser ? <Order /> : <Login />,
         }
 
     ],
