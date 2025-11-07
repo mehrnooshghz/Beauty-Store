@@ -12,7 +12,7 @@ const cartSlice = createSlice({
     addProduct: (state, action) => {
       state.quantity += 1;
       state.products.push(action.payload);
-      state.email= action.payload,email;
+      state.email= action.payload.email;
       state.total += action.payload.price * action.payload.quantity;
     },
     removeProduct: (state, action) => {

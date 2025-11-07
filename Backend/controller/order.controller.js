@@ -44,6 +44,7 @@ const deleteOrder = asyncHandler(async (req, res) => {
 // GET USER ORDER
 const getUserOrder = asyncHandler(async (req, res) => {
   const orders = await Order.find({ userId: req.params.id }).exec();
+  
 
   // Execute the query
   if (!orders || orders.length === 0) {

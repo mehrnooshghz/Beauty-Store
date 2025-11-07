@@ -11,7 +11,7 @@ const OrderSchema = mongoose.Schema(
     },
     products: {
       type: Array,
-      require: true,
+      required: true,
     },
     total: {
       type: Number,
