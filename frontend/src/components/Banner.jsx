@@ -34,8 +34,8 @@ const Banner = () => {
          <h1 className="text-3xl mt-3">{banner.title}</h1>
 
          <div className="flex items-center mt-5">
-             <button className="bg-[#e64fbe] p-2.5 w-[200px] text-white cursor-pointer mr-9">Shop Now</button>
-             <button className="bg-gray-500 p-2.5 w-[200px] text-white cursor-pointer mr-9" >CALL: (176) 678 890</button>
+             <button className="bg-[#1d4ef1] p-2.5 w-[200px] text-white  mr-9">Shop Now</button>
+             <button className="bg-gray-500 p-2.5 w-[200px] text-white  mr-9" >CALL: (176) 678 890</button>
          </div>
        </div>
     </div>

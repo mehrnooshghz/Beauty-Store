@@ -4,12 +4,11 @@ import generateToken from "../util/generateToken.js";
 
 // REGISTER USER
 // route POST /api/v1/auth/register
-//@access public
+// @access public
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   const userExists = await User.findOne({ email });
-
   if (userExists) {
     res.status(400);
     throw new Error("User already exists");
@@ -34,20 +33,21 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-// LOGIN USER
-// route POST /api/v1/auth/Login
+//LOGIN USER
+// route POST /api/v1/auth/login
 //@access public
 
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
-
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);
     res.status(200).json({
       _id: user._id,
       name: user.name,
       email: user.email,
+      phone: user.phone || "",
+      address: user.address || "",
     });
   } else {
     res.status(401);
@@ -56,7 +56,7 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 // LOGOUT USER
-// route POST /api/v1/auth/Logout
+// route POST /api/v1/auth/logout
 //@access public
 
 const logOut = asyncHandler(async (req, res) => {

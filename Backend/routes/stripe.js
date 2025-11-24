@@ -56,10 +56,11 @@ router.post("/create-checkout-session", async (req, res) => {
   }
 });
 
+
 // web hook
 let endpointSecret;
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
-//let endpointSecret = "whsec_4b0c769c19b408e3ba5a1f292363ad83395ad2b2e4321a7647932ad68d320466";
+//let endpointSecret = "whsec_f0afeb838a5a0ae9b1160016c9632978d6a16c6d1a0fb1a9d60c32f1151ae20b";
 
 router.post(
   "/webhook",
@@ -115,6 +116,7 @@ router.post(
     res.send().end();
   }
 );
+
 
 
 export default router;

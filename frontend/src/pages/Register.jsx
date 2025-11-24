@@ -42,7 +42,7 @@ const Register = () => {
          {/* image */}
 
          <div className="h-[500px] w-[500px] transition-transform duration-700 ease-in-out transform hover:scale-105 ">
-           <img src="/lotion1.jpg" alt="login" className="object-cover h-full w-full" />
+           <img src="/blue.avif" alt="login" className="object-cover h-full w-full" />
          </div>
 
         {/* Form */}
@@ -52,26 +52,26 @@ const Register = () => {
 
              <div className="mb-5">
               <label htmlFor="" className="block text-gray-600 mb-1">Full Name</label>
-              <input type="text" className="w-full p-3 border border-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d55fbb]" placeholder="Maria" onChange={(e) => setName(e.target.value)}/>
+              <input type="text" className="w-full p-3 border border-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1f2ce2]" placeholder="Maria" onChange={(e) => setName(e.target.value)}/>
             </div>
 
             <div className="mb-5">
               <label htmlFor="" className="block text-gray-600 mb-1">Email</label>
-              <input type="text" className="w-full p-3 border border-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d55fbb]" placeholder="example@example.com" onChange={(e) => setEmail(e.target.value)} />
+              <input type="text" className="w-full p-3 border border-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1f2ce2]" placeholder="example@example.com" onChange={(e) => setEmail(e.target.value)} />
             </div>
 
             <div className="mb-5">
               <label htmlFor="" className="block text-gray-600 mb-1">Password</label>
-              <input type="password" className="w-full p-3 border border-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d55fbb]" placeholder="*******"  onChange={(e) => setPassword(e.target.value)} />
+              <input type="password" className="w-full p-3 border border-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1f2ce2]" placeholder="*******"  onChange={(e) => setPassword(e.target.value)} />
             </div>
 
-            <button className="w-full py-2 bg-[#d55fbb] text-white font-bold rounded-md transition-transform duration-500 hover:bg-blue-200 focus:outline-none focus:ring-red-500 trasform hover:scale-105" 
+            <button className="w-full py-2 bg-[#1f2ce2] text-white font-bold rounded-md transition-transform duration-500 hover:bg-blue-200 focus:outline-none focus:ring-blue-500 trasform hover:scale-105" 
              onClick={handleRegister}>Create an Account</button>
              
              <div className="mt-4 text-sm text-gray-600">
               <span>Have Already an Account?</span>
               
-              <Link to="/login" className="text-red-500 hover:underline ml-1">
+              <Link to="/login" className="text-blue-500 hover:underline ml-1">
               Login
               </Link>
 
