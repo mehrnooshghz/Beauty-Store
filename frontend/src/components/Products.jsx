@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import Product from "./Product";
 import PropTypes from "prop-types";
 import { userRequest } from "../requestMethods";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
+
 
 const Products = ({ filters, sort, query }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+
 
   useEffect(() => {
     const getProducts = async () => {
@@ -25,8 +27,10 @@ const Products = ({ filters, sort, query }) => {
     getProducts();
   }, [query]);
 
+
   useEffect(() => {
     let tempProducts = [...products];
+
 
     // apply filters
     if (filters) {
@@ -48,19 +52,27 @@ const Products = ({ filters, sort, query }) => {
       tempProducts.sort((a, b) => b.originalPrice - a.originalPrice);
     }
 
+
     setFilteredProducts(tempProducts);
   }, [products, filters, sort]);
 
+
   return (
-    <div className="flex flex-wrap mx-10">
+      <div className="max-w-[1555px] mx-auto px-6">
+        <div className="flex flex-wrap justify-start gap-2">
       {filteredProducts.map((product, index) => (
         <Link to={`/product/${product._id}`} key={product._id}>
           <Product product={product} />
         </Link>
-      ))}
+      ))
+      }
     </div>
+      </div>
+      
+    
   );
 };
+
 
 Products.propTypes = {
   cat: PropTypes.string,
@@ -69,4 +81,8 @@ Products.propTypes = {
   query: PropTypes.string,
 };
 
+
 export default Products;
+
+
+

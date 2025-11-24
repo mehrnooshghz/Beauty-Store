@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify"
 import { login } from "../redux/apiCalls";
 import 'react-toastify/dist/ReactToastify.css'
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 const Login = () => {
    const [email, setEmail] = useState("")
    const [password, setPassword] = useState("")
@@ -12,24 +13,40 @@ const Login = () => {
    const dispatch = useDispatch();
    const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
-    e.preventDefault()
-    try {
-      setLoading(true);
-      login(dispatch, {email, password});
-      console.log(user.currentUser)
 
-      setLoading(false)
-      navigate("/")
-      
-    } catch (error) {
-      if (error.response && error.response.data.message) {
-        toast.error(error.response.data.message);  
-      } else {
-        toast.error("an unexpected error occured, please try again.") 
-      }
+   useEffect(() => {
+   if (user.currentUser) {
+    navigate("/");
+   }
+  }, [user.currentUser, navigate]);
+
+
+    const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+  try {
+    // Wait for the login function to finish
+    await login(dispatch, { email, password });
+
+    // Check if login was successful
+    if (user.currentUser) {
+      navigate("/"); // only navigate if user exists
+    } else {
+      toast.error("Invalid email or password");
     }
+
+  } catch (error) {
+    if (error.response && error.response.data.message) {
+      toast.error(error.response.data.message);
+    } else {
+      toast.error("An unexpected error occurred, please try again.");
+    }
+  } finally {
+    setLoading(false);
   }
+};
+
 
 
   return (
@@ -51,31 +68,32 @@ const Login = () => {
          {/* image */}
 
          <div className="h-[500px] w-[500px] transition-transform duration-700 ease-in-out transform hover:scale-105 ">
-           <img src="/lotion1.jpg" alt="login" className="object-cover h-full w-full" />
+           <img src="/blue.avif" alt="login" className="object-cover h-full w-full" />
          </div>
 
         {/* Form */}
-        <div className="p-10 w-[500px]">
+        <div className="p-10 w-[500px]" >
           <h2 className="text-xl font-bold text-gray-700 mb-5">Login</h2>
-          <form className=" spay-y-5 ">
+          <form className=" spay-y-5 " autoComplete="off">
+            
             <div className="mb-5">
               <label htmlFor="" className="block text-gray-600 mb-1">Email</label>
-              <input type="text" className="w-full p-3 border border-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d55fbb]" placeholder="example@example.com" onChange={(e) => setEmail(e.target.value)} />
+              <input type="text" className="w-full p-3 border border-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1f2ce2]" placeholder="example@example.com" value={email}  onChange={(e) => setEmail(e.target.value)}  />
             </div>
 
             <div className="mb-5">
               <label htmlFor="" className="block text-gray-600 mb-1">Password</label>
-              <input type="password" className="w-full p-3 border border-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d55fbb]" placeholder="*******" onChange={(e) => setPassword(e.target.value)}/>
+              <input type="password" className="w-full p-3 border border-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1f2ce2]" placeholder="*******" value={password} onChange={(e) => setPassword(e.target.value)}/>
             </div>
 
-            <button className="w-full py-2 bg-[#d55fbb] text-white font-bold rounded-md transition-transform duration-500 hover:bg-blue-200 focus:outline-none focus:ring-red-500 trasform hover:scale-105" onClick={handleLogin}>
+            <button className="w-full py-2 bg-[#1f2ce2] text-white font-bold rounded-md transition-transform duration-500 hover:bg-blue-200 focus:outline-none focus:ring-blue-500 trasform hover:scale-105" onClick={handleLogin}>
               {loading ? "loading ..." : "Login"}
               </button>
              
              <div className="mt-4 text-sm text-gray-600">
               <span>Don't Have an Account? </span>
               
-              <Link to="/create-account" className="text-red-500 hover:underline ml-1">
+              <Link to="/create-account" className="text-blue-500 hover:underline ml-1">
               Sign Up
               </Link>
 

@@ -4,11 +4,16 @@ import Rating from "@mui/material/Rating";
 import { useEffect } from "react";
 import { userRequest } from "../requestMethods";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../redux/cartRedux";
 const Order = () => {
   const user = useSelector((state) => state.user);
   const [orders, setOrders] = useState([]);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
+  const [rating, setRating] = useState({});
+  const [comment, setComment] = useState({});
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getUserOrder = async () => {
@@ -62,16 +67,31 @@ const Order = () => {
 
   const handleRating = async (id) => {
     const singleRating = {
-      star: rating,
+      star: parseFloat(rating[id] || 0), // حتما عدد باشه
       name: user.currentUser.name,
       postedBy: user.currentUser.name,
-      comment: comment,
+      comment: comment[id] || "", // حتما رشته باشه
     };
 
     try {
+      // ارسال به سرور
       await userRequest.put(`/products/rating/${id}`, singleRating);
-      setComment("");
-      setRating(0);
+
+      // آپدیت محلی برای نمایش فوری
+      setOrders((prev) =>
+        prev.map((order) => ({
+          ...order,
+          products: order.products.map((p) =>
+            p._id === id
+              ? { ...p, ratings: [...(p.ratings || []), singleRating] }
+              : p
+          ),
+        }))
+      );
+
+      // پاک کردن فیلدهای مربوط به این محصول
+      setComment({ ...comment, [id]: "" });
+      setRating({ ...rating, [id]: 0 });
 
       alert("Thank you for your review!");
     } catch (error) {
@@ -79,6 +99,13 @@ const Order = () => {
       alert("Error submitting review. Please try again.");
     }
   };
+
+  useEffect(() => {
+    // Clear cart after orders are fetched or payment is successful
+    if (orders.length > 0) {
+      dispatch(clearCart());
+    }
+  }, [orders, dispatch]);
 
   return (
     <div className="min-h-screen bg-gray-50 p-8">
@@ -121,10 +148,12 @@ const Order = () => {
                       <div className="flex flex-col">
                         <h3 className="my-3">Rate This Product</h3>
                         <Rating
-                          name="simple controlled"
-                          value={rating}
+                          name={`rating-${product._id}`}
+                          value={rating[product._id] || 0} // each product has its own value
                           precision={0.01}
-                          onChange={(event, newValue) => setRating(newValue)}
+                          onChange={(event, newValue) =>
+                            setRating({ ...rating, [product._id]: newValue })
+                          }
                           sx={{
                             "& .MuiRating-iconFilled": { color: "#FFD700" }, // طلایی
                             "& .MuiRating-iconHover": { color: "#FFC107" }, // طلایی روشن‌تر هنگام هاور
@@ -133,12 +162,17 @@ const Order = () => {
 
                         <textarea
                           placeholder="Leave a message"
-                          value={comment}
-                          onChange={(e) => setComment(e.target.value)}
+                          value={comment[product._id] || ""}
+                          onChange={(e) =>
+                            setComment({
+                              ...comment,
+                              [product._id]: e.target.value,
+                            })
+                          }
                           className="w-[300px] mt-3 bg-white p-4 rounded-lg shadow-md border border-gray-200"
                         ></textarea>
                         <button
-                          className="bg-[#1e1e1e] mt-3 w-[200px] p-[5px] text-white cursor-pointer"
+                          className="bg-[#1f2ce2] mt-3 w-[200px] p-[5px] text-white cursor-pointer"
                           onClick={() => handleRating(product._id)}
                         >
                           Submit
@@ -181,7 +215,10 @@ const Order = () => {
         </div>
 
         <div className="mt-8 text-center">
-          <button className="bg-[#ef93db] text-white p-3 rounded-lg font-semibold">
+          <button
+            className="bg-[#1f2ce2] text-white p-3 rounded-lg font-semibold cursor-pointer"
+            onClick={() => navigate("/")}
+          >
             Continue Shopping
           </button>
         </div>

@@ -2,42 +2,33 @@ const Footer = () => {
   return (
     <div className="bg-gray-100 px-[200px] h-[60vh] mt-10">
       {/* UPPER PART */}
-      <div className="flex justify-between py[5%]">
-        <div>
-          <img src="/blisslogo1.png" alt="" height={200} width={200} />
-          <p className="mt-2">LET'S MAKE YOUR SKIN FLOURISH WITH OUR PRODUCTS</p>
-        </div>
-        <div>
-          <h3 className="text-xl font-semibold">Quick Links</h3>
-          <ul className="mt-2 space-y-2">
-            <li>
-              <a href="" className="hover:underline">Home</a>
-            </li>
-            <li>
-              <a href="" className="hover:underline">About Us</a>
-            </li>
-            <li>
-              <a href="" className="hover:underline">Shop</a>
-            </li>
-            <li>
-              <a href="" className="hover:underline">Contact</a>
-            </li>
-          </ul>
-        </div>
+<div className="flex justify-between items-center py-[5%] h-[70%]">
+  <div>
+    <img src="/blisslogo1.png" alt="" height={200} width={200} />
+    <p className="mt-2">LET'S MAKE YOUR SKIN FLOURISH WITH OUR PRODUCTS</p>
+  </div>
 
-        <div className="w-full md:w-1/3">
+  <div>
+    <h3 className="text-xl font-semibold">Quick Links</h3>
+    <ul className="mt-2 space-y-2">
+      <li><a href="" className="hover:underline">Home</a></li>
+      <li><a href="" className="hover:underline">About Us</a></li>
+      <li><a href="" className="hover:underline">Shop</a></li>
+      <li><a href="" className="hover:underline">Contact</a></li>
+    </ul>
+  </div>
 
-        <h2 className="text-xl font-semibold">Contact Us</h2>
-        <p className="mt-2">123 BeautyBliss Ave, city, Country</p>
-        <p className="mt-2">phone: (123) 456-7890</p>
-        <p className="mt-2">Email: info@beautybliss.com</p>
+  <div className="w-full md:w-1/3">
+    <h2 className="text-xl font-semibold">Contact Us</h2>
+    <p className="mt-2">123 BeautyBliss Ave, City, Country</p>
+    <p className="mt-2">Phone: (123) 456-7890</p>
+    <p className="mt-2">Email: info@beautybliss.com</p>
+  </div>
+</div>
 
-        </div>
-           
-        </div> 
 
       {/* LOWER PART*/}
-   <div className="mt-8 border-t border-[#e9acd9] pt-4 text-center">
+   <div className="mt-8 border-t bg-gray-100 pt-4 text-center">
         <p>&copy; 2025 BeautyBliss. All rights reserved.</p>
         <div className="flex justify-center space-x-4 mt-4">
           <a href="#" className="hover:text-red-400">

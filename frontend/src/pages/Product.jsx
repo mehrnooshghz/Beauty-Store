@@ -125,11 +125,11 @@ const Product = () => {
 
 
       {/* LEFT */}
-      <div className="flex-1 h-[500px] w-[600px]">
+      <div className="flex-1 flex justify-center items-center bg-white rounded-2xl shadow-lg p-4 max-w-[600px]">
         <img
           src={product.img}
           alt="product"
-          className="h-full w-full object-cover"
+          className="w-[80%] h-auto max-h-[500] object-contain rounded-xl transition-transform duration-300 ease-in-out hover:scale-105 hover-shadow-xl"
         />
       </div>
 
@@ -162,7 +162,7 @@ const Product = () => {
         </div>
 
 
-        <div className="inline-flex items-center bg-[#ef93db] text-white font-semibold text-sm p-3 rounded-full shadow-md">
+        <div className="inline-flex items-center bg-[#1f2ce2] text-white font-semibold text-sm p-3 rounded-full shadow-md">
           Wholesale Availabe : ${product.wholesalePrice} as from{" "}
           {product.wholesaleMinimumQuantity} items{" "}
         </div>
@@ -170,19 +170,19 @@ const Product = () => {
 
         <div className="flex items-center my-5 p-4">
           <FaMinus
-            className="bg-[#ef93db] text-white cursor-pointer p-2 rounded-full mr-4 text-3xl"
+            className="bg-[#1f2ce2] text-white cursor-pointer p-2 rounded-full mr-4 text-3xl"
             onClick={() => handleQuantity("dec")}
           />
           <span className="text-lg font-semibold mx-4">{quantity}</span>
           <FaPlus
-            className="bg-[#ef93db] text-white cursor-pointer p-2 rounded-full mr-4 text-3xl"
+            className="bg-[#1f2ce2] text-white cursor-pointer p-2 rounded-full mr-4 text-3xl"
             onClick={() => handleQuantity("inc")}
           />
         </div>
 
 
         <button
-          className="bg-[#1e1e1e] p-2.5 w-[200px] text-white cursor-pointer"
+          className="bg-[#1f2ce2] p-2.5 w-[200px] text-white cursor-pointer"
           onClick={handleAddToCart}
         >
           Add to cart

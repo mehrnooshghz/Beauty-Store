@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { userRequest } from '../requestMethods';
 import { useEffect, useState } from 'react';
 const Products = () => {
-   const [product, setProduct] = useState({});
+   const [product, setProduct] = useState([]);
 
   useEffect(() =>{
     const getProduct = async() =>{
@@ -21,6 +21,16 @@ const Products = () => {
     getProduct()
 
   },[])
+
+  const handleDelete = async (id) => {
+  try {
+    await userRequest.delete(`/products/${id}`);
+    setProduct(prev => prev.filter((item) => item._id !== id));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
 const columns = [
   { field: "_id", headerName: "ID", width: 90 },
@@ -66,10 +76,10 @@ const columns = [
     field: "delete",
     headerName: "Delete",
     width: 100,
-    renderCell: () => {
+    renderCell: (params) => {
       return (
         <>
-          <FaTrash className="text-red-500 cursor-pointer m-2" />
+          <FaTrash className="text-red-500 cursor-pointer m-2" onClick={() => handleDelete(params.row._id)} />
         </>
       );
     },
